@@ -1,0 +1,31 @@
+<mat-table [dataSource]="dataSource">
+    <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+      <mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!isButton(col)">
+          {{ col.text }}
+        </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="isButton(col); then buttonTemplate else dataTemplate"></div>
+        <!-- Render button instead of data-->
+        <ng-template #buttonTemplate>
+          <button mat-button (click)="onButtonClick(element.id, col.key)">
+            {{ col.text }}
+          </button>
+        </ng-template>
+        <!-- Default template to render is data-->
+        <ng-template #dataTemplate>
+          <span *ngIf="!isEditable(col)">
+            {{ element[col.key] }}
+          </span>
+          <mat-form-field *ngIf="isEditable(col)">
+            <input [type]="(col | schemaCast).input_type" matInput [ngModel]="element[col.key]" 
+              (ngModelChange)="onCellChange(element.name, col.key, $event)"/>
+          </mat-form-field>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>

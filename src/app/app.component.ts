@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { TableSchema } from "./table-schema";
+import { TableSchema } from "./dynamic-table/table-schema";
 
 @Component({
   selector: 'app-root',

@@ -9,7 +9,7 @@
         <div *ngIf="isButton(col); then buttonTemplate else dataTemplate"></div>
         <!-- Render button instead of data-->
         <ng-template #buttonTemplate>
-          <button mat-button (click)="onButtonClick(element.id, col.key)">
+          <button mat-raised-button [color]="(col | buttonCast).property" (click)="onButtonClick(element.id, col.key)">
             {{ col.text }}
           </button>
         </ng-template>
@@ -19,7 +19,7 @@
             {{ element[col.key] }}
           </span>
           <mat-form-field *ngIf="isEditable(col)">
-            <input [type]="(col | schemaCast).input_type" matInput [ngModel]="element[col.key]" 
+            <input [type]="(col | editableCast).input_type" matInput [ngModel]="element[col.key]" 
               (ngModelChange)="onCellChange(element.name, col.key, $event)"/>
           </mat-form-field>
         </ng-template>

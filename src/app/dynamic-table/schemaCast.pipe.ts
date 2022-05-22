@@ -1,12 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TableSchemaEditable } from './table-schema';
+import { TableSchemaButton, TableSchemaEditable } from './table-schema';
 
 @Pipe({
-  name: 'schemaCast',
+  name: 'editableCast',
   pure: true
 })
-export class SchemaCastPipe implements PipeTransform {  
+
+export class EditableCastPipe implements PipeTransform {  
   transform(value: any): TableSchemaEditable {
+    return value;
+  }
+}
+
+@Pipe({
+  name: 'buttonCast',
+  pure: true
+})
+
+export class ButtonCastPipe implements PipeTransform {  
+  transform(value: any): TableSchemaButton {
     return value;
   }
 }

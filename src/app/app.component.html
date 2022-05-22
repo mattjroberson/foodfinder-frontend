@@ -1,3 +1,6 @@
-<app-table [columnsSchema]="COLUMNS_SCHEMA" [dataSource]="USER_DATA">
+<app-table [columnsSchema]="COLUMNS_SCHEMA" 
+            [dataSource]="USER_DATA" 
+            (buttonClickEvent)="onButtonPress($event)"
+            (cellChangeEvent)="onCellChange($event)">
 
 </app-table>
